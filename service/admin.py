@@ -1,5 +1,7 @@
 from django.contrib import admin
 
+from blog.models import Blog
+
 from service.models import Client, MailingSettings, Message, Log
 
 
@@ -29,4 +31,12 @@ class LogAdmin(admin.ModelAdmin):
     list_display = ['pk', 'mailing_list', 'time', 'status', 'server_response', ]
     list_filter = ['mailing_list', 'status', ]
     search_fields = ['mailing_list', 'time', 'status', ]
+
+
+@admin.register(Blog)
+class BlogAdmin(admin.ModelAdmin):
+    list_display = ('pk', 'title', 'slug', 'content', 'created_at')
+    list_filter = ('title','slug', 'created_at',)
+    search_fields = ('title','slug', 'created_at',)
+
 
