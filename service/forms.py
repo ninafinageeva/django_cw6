@@ -10,7 +10,7 @@ class StyleFormMixin:
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
-            field.widget.attrs['class'] = 'form-control rounded '
+            field.widget.attrs['class'] = 'form-control rounded'
 
 
 class ClientForm(StyleFormMixin, ModelForm):
@@ -20,6 +20,7 @@ class ClientForm(StyleFormMixin, ModelForm):
         exclude = ('user',)
 
 class MailingSetingForm(StyleFormMixin, forms.ModelForm):
+    """Form for MailingSettings"""
     class Meta:
         model = MailingSettings
         exclude = ('status', 'user')
@@ -52,7 +53,7 @@ class MailingSetingForm(StyleFormMixin, forms.ModelForm):
             raise forms.ValidationError('Дата окончания рассылки должна быть больше даты начала рассылки')
 
 
-class MaillinngSettingsModeratorForm(StyleFormMixin, ModelForm):
+class MailingSettingsModeratorForm(StyleFormMixin, ModelForm):
     def __init__(self, user, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -75,4 +76,4 @@ class MessageForm(StyleFormMixin, ModelForm):
         model = Message
         fields = '__all__'
         exclude = ('user',)
-        
+
