@@ -19,8 +19,10 @@ class ClientForm(StyleFormMixin, ModelForm):
         fields = '__all__'
         exclude = ('user',)
 
-class MailingSetingForm(StyleFormMixin, forms.ModelForm):
+
+class MailingSettingForm(StyleFormMixin, forms.ModelForm):
     """Form for MailingSettings"""
+
     class Meta:
         model = MailingSettings
         exclude = ('status', 'user')
@@ -28,11 +30,11 @@ class MailingSetingForm(StyleFormMixin, forms.ModelForm):
     def __init__(self, user, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['clients'] = forms.ModelMultipleChoiceField(queryset=Client.objects.filter(user=user),
-                                                                        label='Клиенты',
-                                                                        widget=forms.CheckboxSelectMultiple)
+                                                                label='Клиенты',
+                                                                widget=forms.CheckboxSelectMultiple)
         self.fields['mailing_list'] = forms.ModelChoiceField(queryset=Message.objects.filter(user=user),
-                                                                     label='Сообщение',
-                                                                     widget=forms.RadioSelect)
+                                                             label='Сообщение',
+                                                             widget=forms.RadioSelect)
 
     get_tz = pytz.timezone('UTC')
     current_time = datetime.datetime.now(get_tz)
@@ -63,12 +65,10 @@ class MailingSettingsModeratorForm(StyleFormMixin, ModelForm):
     ]
     status = forms.ChoiceField(choices=STATUS_CHOICES, label='Статус рассылки', )
 
-
     class Meta:
         model = MailingSettings
         fields = ('status',)
         exclude = ('user',)
-
 
 
 class MessageForm(StyleFormMixin, ModelForm):
@@ -76,4 +76,3 @@ class MessageForm(StyleFormMixin, ModelForm):
         model = Message
         fields = '__all__'
         exclude = ('user',)
-

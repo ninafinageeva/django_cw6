@@ -13,8 +13,8 @@ urlpatterns = [
     path('', LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('register/', views.RegisterView.as_view(), name='register'),
-    path('activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/',
-         views.activate, name='activate'),
+    # path('activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/',
+    #      views.activate, name='activate'),
     path('profile/', views.ProfileView.as_view(), name='profile'),
     path('password_reset/', PasswordResetView.as_view(
         template_name='users/password_reset_form.html',

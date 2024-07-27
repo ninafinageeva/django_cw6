@@ -5,7 +5,7 @@ from django.views.generic import ListView, CreateView, DetailView, UpdateView, D
 
 from blog.models import Blog
 from service.models import MailingSettings, Client, Message, Log
-from service.forms import MailingSetingForm, MessageForm, ClientForm, MaillinngSettingsModeratorForm
+from service.forms import MailingSettingForm, MessageForm, ClientForm, MailingSettingsModeratorForm
 
 
 class HomeView(LoginRequiredMixin, TemplateView):
@@ -74,7 +74,6 @@ class ClientDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('service:clients_list')
 
 
-
 class MailingListView(LoginRequiredMixin, ListView):
     model = MailingSettings
     template_name = 'service/mailing_list.html'
@@ -82,7 +81,7 @@ class MailingListView(LoginRequiredMixin, ListView):
 
 class MailingCreateView(LoginRequiredMixin, CreateView):
     model = MailingSettings
-    form_class = MailingSetingForm
+    form_class = MailingSettingForm
     success_url = reverse_lazy('service:mailing_list')
 
     def get_form_kwargs(self):
@@ -115,7 +114,7 @@ class MailingDetailView(LoginRequiredMixin, DetailView):
 
 class MailingUpdateView(LoginRequiredMixin, UpdateView):
     model = MailingSettings
-    form_class = MailingSetingForm
+    form_class = MailingSettingForm
     success_url = reverse_lazy('service:mailing_list')
 
     def get_form_kwargs(self):
@@ -133,12 +132,12 @@ class MailingUpdateView(LoginRequiredMixin, UpdateView):
     def get_form_class(self):
         """Получение формы для редактирования продукта"""
         if self.request.user.is_superuser:
-            return MailingSetingForm
+            return MailingSettingForm
         elif self.request.user.is_staff and self.request.user.has_perm('service.change_status'):
-            return MaillinngSettingsModeratorForm
+            return MailingSettingsModeratorForm
 
         elif self.request.user == self.get_object().user:
-            return MailingSetingForm
+            return MailingSettingForm
 
         else:
             raise PermissionDenied
@@ -148,8 +147,6 @@ class MailingDeleteView(LoginRequiredMixin, DeleteView):
     model = MailingSettings
     template_name = 'service/mailing_confirm_delete.html'
     success_url = reverse_lazy('service:mailing_list')
-
-
 
 
 class MessageCreateView(LoginRequiredMixin, CreateView):
@@ -193,4 +190,3 @@ class MessageUpdateView(LoginRequiredMixin, UpdateView):
 class MessageDeleteView(LoginRequiredMixin, DeleteView):
     model = Message
     permission_required = 'service.delete_message'
-

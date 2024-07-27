@@ -84,11 +84,9 @@ class Log(models.Model):
 
     mailing_list = models.ForeignKey(MailingSettings, on_delete=models.CASCADE, verbose_name='Рассылка')
 
-
     def __str__(self):
         return f'{self.time} {self.status}'
 
     class Meta:
         verbose_name = 'Лог'
         verbose_name_plural = 'Логи'
-

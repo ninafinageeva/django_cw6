@@ -4,8 +4,8 @@ from django.views.generic import TemplateView
 
 from service.apps import ServiceConfig
 from service.views import MailingCreateView, MailingListView, ClientListView, MessageCreateView, MailingDetailView, \
-    MailingUpdateView, MailingDeleteView, MessageListView, MessageDetailView, MessageUpdateView, MessageDeleteView, \
-    ClientCreateView, ClientUpdateView, ClientDeleteView, HomeView, ClientDetailView
+    MailingUpdateView, MailingDeleteView, ClientCreateView, ClientUpdateView, ClientDetailView, ClientDeleteView, \
+    HomeView, MessageListView, MessageDetailView, MessageUpdateView, MessageDeleteView
 
 app_name = ServiceConfig.name
 

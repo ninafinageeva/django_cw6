@@ -14,7 +14,7 @@ class ClientAdmin(admin.ModelAdmin):
 
 @admin.register(MailingSettings)
 class MailingListSettingsAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'start_time', 'end_time','periodicity', 'status',)
+    list_display = ('pk', 'start_time', 'end_time', 'periodicity', 'status',)
     list_filter = ('start_time', 'end_time', 'periodicity', 'status',)
     search_fields = ('start_time', 'end_time',)
 
@@ -36,7 +36,5 @@ class LogAdmin(admin.ModelAdmin):
 @admin.register(Blog)
 class BlogAdmin(admin.ModelAdmin):
     list_display = ('pk', 'title', 'slug', 'content', 'created_at')
-    list_filter = ('title','slug', 'created_at',)
-    search_fields = ('title','slug', 'created_at',)
-
-
+    list_filter = ('title', 'slug', 'created_at',)
+    search_fields = ('title', 'slug', 'created_at',)
